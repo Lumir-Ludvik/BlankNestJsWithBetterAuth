@@ -1,5 +1,5 @@
 # Use Node.js version 24 as the base image
-FROM node:24
+FROM node:24-alpine
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
