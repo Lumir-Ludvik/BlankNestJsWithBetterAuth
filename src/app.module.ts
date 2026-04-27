@@ -4,10 +4,12 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { auth } from "./auth";
 import { HealthModule } from "./health/health.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
     HealthModule,
+    UsersModule,
     AuthModule.forRoot({
       auth,
       bodyParser: {
