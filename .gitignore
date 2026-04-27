@@ -12,6 +12,11 @@
 /index.js.map
 /index.d.ts
 
+#drizzle configuration
+drizzle.config.d.ts
+drizzle.config.js
+drizzle.config.js.map
+
 # Logs
 logs
 *.log
@@ -63,6 +68,3 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-drizzle.config.d.ts
-drizzle.config.js
-drizzle.config.js.map
