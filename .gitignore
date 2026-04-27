@@ -2,6 +2,15 @@
 /dist
 /node_modules
 /build
+*.tsbuildinfo
+
+/auth.js
+/auth.js.map
+/auth-schema.js
+/auth-schema.js.map
+/index.js
+/index.js.map
+/index.d.ts
 
 # Logs
 logs
