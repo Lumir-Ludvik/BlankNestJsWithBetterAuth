@@ -7,6 +7,9 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    throw new Error(
+      "This is a test error to demonstrate logging and error handling.",
+    );
     return this.appService.getHello();
   }
 }
