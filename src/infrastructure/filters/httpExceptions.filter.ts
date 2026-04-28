@@ -8,24 +8,17 @@ import {
 } from "@nestjs/common";
 import { Request, Response } from "express";
 
-@Catch()
-export class AllExceptionsFilter implements ExceptionFilter {
-  private readonly logger = new Logger(AllExceptionsFilter.name);
+@Catch(HttpException)
+export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
 
-  catch(exception: unknown, host: ArgumentsHost): void {
+  catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request<object, object, unknown>>();
+    const status: HttpStatus = exception.getStatus();
 
-    const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
-
-    const message =
-      exception instanceof HttpException
-        ? exception.message
-        : "Internal server error";
+    const message = exception.message;
 
     const logContext = {
       method: request.method,
@@ -35,11 +28,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     };
 
     if (status >= HttpStatus.INTERNAL_SERVER_ERROR) {
-      this.logger.error(
-        message,
-        exception instanceof Error ? exception.stack : String(exception),
-        JSON.stringify(logContext),
-      );
+      this.logger.error(message, exception.stack, JSON.stringify(logContext));
     } else {
       this.logger.warn(`${message} ${JSON.stringify(logContext)}`);
     }
