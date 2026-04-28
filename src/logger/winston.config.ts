@@ -18,7 +18,11 @@ export const winstonConfig: winston.LoggerOptions = {
     new winston.transports.File({
       filename: "logs/error.log",
       level: "error",
-      format: combine(timestamp(), errors({ stack: true }), winston.format.json()),
+      format: combine(
+        timestamp(),
+        errors({ stack: true }),
+        winston.format.json(),
+      ),
     }),
     new winston.transports.File({
       filename: "logs/combined.log",

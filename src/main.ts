@@ -6,7 +6,12 @@ import { CommonExceptionFilter } from "./infrastructure/filters/commonException.
 import { HttpExceptionFilter } from "./infrastructure/filters/httpExceptions.filter";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  const app = await NestFactory.create(AppModule, {
+    // body parser turned off because of @nestjs-better-auth, body parser
+    // is re-added in auth configuration in App.module.ts
+    bodyParser: false,
+    bufferLogs: true,
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const logger = app.get<LoggerService>(WINSTON_MODULE_NEST_PROVIDER);

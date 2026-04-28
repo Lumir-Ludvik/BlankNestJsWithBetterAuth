@@ -5,6 +5,7 @@ import {
   HealthCheckService,
   MemoryHealthIndicator,
 } from "@nestjs/terminus";
+import { AllowAnonymous } from "@thallesp/nestjs-better-auth";
 import { DbHealthIndicator } from "./db.health.indicator";
 
 @Controller("health")
@@ -16,6 +17,7 @@ export class HealthController {
     private db: DbHealthIndicator,
   ) {}
 
+  @AllowAnonymous()
   @Get("liveness")
   @HealthCheck()
   liveness() {
@@ -24,6 +26,7 @@ export class HealthController {
     ]);
   }
 
+  @AllowAnonymous()
   @Get("readiness")
   @HealthCheck()
   readiness() {
